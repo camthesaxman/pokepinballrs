@@ -3,6 +3,7 @@
 
 // Place all external variable declarations in this file
 
+extern void (*const gUnknown_08527F08[])(void);
 extern u8 gUnknown_03000000[];
 //extern ? gOamBuffer;
 //extern ? IntrMain_Buffer;
