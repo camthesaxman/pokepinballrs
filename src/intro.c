@@ -132,8 +132,8 @@ struct IntroData
     u16 unk0;
     u16 unk2;
     u8 filler4[4];
-    u16 unk8;
-    u16 unkA;
+    s16 unk8;
+    s16 unkA;
     u16 unkC;
     u16 unkE;
     u8 filler10[4];
@@ -160,7 +160,7 @@ extern u16 gIntroScene1Sprites_Pals[];
 extern u8 gIntroScene1Sprites_Gfx[];
 extern u8 gUnknown_0201C1C0[];
 
-extern void sub_10170();
+extern void sub_10170(void *, void *, int, u16);
 extern void sub_96A8(void);
 extern void sub_FEB8();
 
@@ -253,11 +253,11 @@ extern struct IntroData2 gUnknown_0201A450;
 
 extern u8 gUnknown_0201C1B8;
 extern u8 gUnknown_0202ADD4;
-extern u16 gUnknown_0202C594;
+extern s16 gUnknown_0202C594;
 extern s32 gUnknown_02019C30;
 extern u32 gUnknown_0201C188;
 extern s16 gUnknown_0202A578;
-extern u32 gUnknown_0202BEF0;
+extern s32 gUnknown_0202BEF0;
 extern s8 gUnknown_0202C5A8;
 
 void sub_96A8(void)
@@ -393,4 +393,67 @@ void sub_98B4(void)
         }
     }
     sub_9CB8();
+}
+
+extern void sub_9E90(void);
+
+void sub_9920(void)
+{
+    if (gUnknown_0202BF10 % 3 == 0)
+    {
+        if (gUnknown_0202C594 < 8)
+        {
+            gUnknown_0202C594++;
+            gUnknown_0201C1B8++;
+            gUnknown_0202ADD4--;
+        }
+        else
+        {
+            sub_10708(gUnknown_0201C1C0, (void *)(VRAM + 0x36E0), 8, 8);
+            gUnknown_0202C790++;
+        }
+        gUnknown_0201A450.unk18 = 1 - gUnknown_0201A450.unk18;
+    }
+    sub_9E90();
+}
+
+extern struct {s16 unk0; s16 unk2;} gUnknown_086A7768[];
+extern s16 gUnknown_086A7788[];
+
+void sub_999C(void)
+{
+    if (gUnknown_0202BEF0 > 0)
+    {
+        gUnknown_0202BEF0 -= 2;
+        if (gUnknown_0202BEF0 <= 0)
+            gUnknown_0202BEF0 = 0;
+        sub_10170(gIntroScene1Sprites_Pals, (void *)(PLTT), 0x200, gUnknown_0202BEF0);
+        sub_10170(gIntroScene1Sprites_Pals, (void *)(PLTT + 0x200), 0x20, gUnknown_0202BEF0);
+    }
+    if (gUnknown_0202BF10 % 3 == 0)
+        gUnknown_0201A450.unk18 = 1 - gUnknown_0201A450.unk18;
+    
+    gUnknown_0202ADA0.unk0--;
+    if (gUnknown_0202BF10 % 2 == 0)
+        gUnknown_0202ADA0.unk2--;
+
+    gMain.unk2E8[0].unk0 = gUnknown_0202ADA0.unk0;
+    gMain.unk2E8[0].unk2 = gUnknown_0202ADA0.unk2;
+
+    gUnknown_0202ADA0.unkA++;
+
+    if (gUnknown_0202ADA0.unkA > gUnknown_086A7768[gUnknown_0202ADA0.unk8].unk2)
+    {
+        sub_10708(&gUnknown_0201C1C0[gUnknown_086A7788[gUnknown_0202ADA0.unk8] * 2], (void *)(VRAM + 0x36E0), 8, 8);
+        gUnknown_0202ADA0.unk8++;
+        if (gUnknown_0202ADA0.unk8 > 3)
+        {
+            gUnknown_0201A450.unk3C = 1;
+            gUnknown_0201A450.unk2C = 1;
+            gUnknown_0201A450.unk1C = 0;
+            gUnknown_0202ADA0.unk14 = 0;
+            gUnknown_0202C790++;
+        }
+    }
+    sub_9E90();
 }
