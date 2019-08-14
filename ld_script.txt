@@ -38,6 +38,7 @@ SECTIONS
         asm/ereader.o(.text);
         asm/pokedex.o(.text);
         src/field_select.o(.text);
+        src/intro.o(.text);
         asm/intro.o(.text);
         asm/high_scores.o(.text);
         src/rom_1068C.o(.text);
