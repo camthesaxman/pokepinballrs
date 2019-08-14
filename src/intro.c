@@ -221,8 +221,8 @@ struct IntroData2
     u16 unk0;
     u16 unk2;
     u8 filler4[4];
-    u16 unk8;
-    u16 unkA;
+    s16 unk8;
+    s16 unkA;
     u8 unkC;
     u8 fillerD[3];
     u16 unk10;
@@ -254,11 +254,11 @@ extern struct IntroData2 gUnknown_0201A450;
 extern u8 gUnknown_0201C1B8;
 extern u8 gUnknown_0202ADD4;
 extern u16 gUnknown_0202C594;
-extern u32 gUnknown_02019C30;
+extern s32 gUnknown_02019C30;
 extern u32 gUnknown_0201C188;
-extern u16 gUnknown_0202A578;
+extern s16 gUnknown_0202A578;
 extern u32 gUnknown_0202BEF0;
-extern u8 gUnknown_0202C5A8;
+extern s8 gUnknown_0202C5A8;
 
 void sub_96A8(void)
 {
@@ -305,4 +305,92 @@ void sub_96A8(void)
     gUnknown_0202A578 = 0;
     gUnknown_0202BEF0 = 32;
     gUnknown_0202C5A8 = 8;
+}
+
+extern s16 gUnknown_086A77A8[][10][2];
+
+extern void sub_9CB8(void);
+
+void sub_978C(void)
+{
+    sub_9CB8();
+    if (gUnknown_0201A450.unk8 == 0x24)
+    {
+        gUnknown_0201A450.unkA++;
+        if (gUnknown_0201A450.unkA > 0x1B)
+        {
+            gUnknown_0201A450.unkA = 0;
+            gUnknown_0202A578 = 0;
+            gUnknown_0202C790++;
+        }
+    }
+    else
+    {
+        gUnknown_0201A450.unkA++;
+        if (gUnknown_0201A450.unkA > 1)
+        {
+            gUnknown_0201A450.unkA = 0;
+            gUnknown_0201A450.unk8++;
+        }
+        if (gUnknown_0202BF10 >= gUnknown_086A77A8[gUnknown_0202C5A8][gUnknown_0202A578][1])
+        {
+            m4aSongNumStart(gUnknown_086A77A8[gUnknown_0202C5A8][gUnknown_0202A578][0]);
+            gUnknown_0202A578++;
+        }
+    }
+}
+
+extern void sub_9D70(void);
+
+void sub_9830(void)
+{
+    gUnknown_02019C30 -= 16;
+    gUnknown_0201C188 -= 16;
+    gUnknown_0201A450.unk0--;
+    if (gUnknown_02019C30 < 32)
+    {
+        gUnknown_0201A450.unkA = 0;
+        gUnknown_0201A450.unk8 = 0x25;
+        gUnknown_0202C790++;
+    }
+    sub_9D70();
+}
+
+void sub_9878(void)
+{
+    gUnknown_0201A450.unkA++;
+    if (gUnknown_0201A450.unkA > 3)
+    {
+        gUnknown_0201A450.unkA = 0;
+        gUnknown_0201A450.unk0 = 0x78;
+        gUnknown_0201A450.unk2 = 0x58;
+        gUnknown_0201A450.unkC = 1;
+        m4aSongNumStart(0xD8);
+        gUnknown_0202C790++;
+    }
+}
+
+void sub_98B4(void)
+{
+    if (gUnknown_0201A450.unk8 == 0x2B)
+    {
+        gUnknown_0201A450.unkA++;
+        if (gUnknown_0201A450.unkA > 1)
+        {
+            gUnknown_0201A450.unkC = 0;
+            sub_10170(gIntroScene1Sprites_Pals + 0xE0, (void *)(PLTT + 0xE0), 0x20, 0);
+            m4aSongNumStart(8);
+            gUnknown_0202C790++;
+        }
+    }
+    else
+    {
+        gUnknown_0201A450.unkA++;
+        if (gUnknown_0201A450.unkA > 1)
+        {
+            gUnknown_0201A450.unkA = 0;
+            gUnknown_0201A450.unk8++;
+        }
+    }
+    sub_9CB8();
 }
