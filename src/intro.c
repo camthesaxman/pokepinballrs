@@ -137,7 +137,7 @@ struct IntroData
     u16 unkC;
     u16 unkE;
     u8 filler10[4];
-    u16 unk14;
+    s16 unk14;
     u8 filler16[2];
     u16 unk18;
     u16 unk1A;
@@ -223,7 +223,7 @@ struct IntroData2
     u8 filler4[4];
     s16 unk8;
     s16 unkA;
-    u8 unkC;
+    s8 unkC;
     u8 fillerD[3];
     u16 unk10;
     u16 unk12;
@@ -240,7 +240,7 @@ struct IntroData2
     u16 unk30;
     u16 unk32;
     u8 filler34[6];
-    u16 unk3A;
+    s16 unk3A;
     u8 unk3C;
     u8 filler3D[3];
     u16 unk40;
@@ -255,7 +255,7 @@ extern u8 gUnknown_0201C1B8;
 extern u8 gUnknown_0202ADD4;
 extern s16 gUnknown_0202C594;
 extern s32 gUnknown_02019C30;
-extern u32 gUnknown_0201C188;
+extern s32 gUnknown_0201C188;
 extern s16 gUnknown_0202A578;
 extern s32 gUnknown_0202BEF0;
 extern s8 gUnknown_0202C5A8;
@@ -432,7 +432,7 @@ void sub_999C(void)
     }
     if (gUnknown_0202BF10 % 3 == 0)
         gUnknown_0201A450.unk18 = 1 - gUnknown_0201A450.unk18;
-    
+
     gUnknown_0202ADA0.unk0--;
     if (gUnknown_0202BF10 % 2 == 0)
         gUnknown_0202ADA0.unk2--;
@@ -457,3 +457,141 @@ void sub_999C(void)
     }
     sub_9E90();
 }
+
+void sub_9AB8(void)
+{
+    gUnknown_0201A450.unk30 -= 14;
+    gUnknown_0201A450.unk32 -= 13;
+    gUnknown_0202ADA0.unk24 -= 16;
+    gUnknown_0202ADA0.unk26 += 1;
+    gUnknown_0202ADA0.unkC -= 16;
+
+    gUnknown_0201A450.unk20 -= 14;
+    gUnknown_0201A450.unk22 -= 13;
+    gUnknown_0201A450.unk40 += 11;
+    gUnknown_0201A450.unk42 -= 2;
+
+    if (gUnknown_0202BF10 % 2 == 0)
+    {
+        gUnknown_0202ADA0.unk0--;
+        gUnknown_0202ADA0.unk2--;
+    }
+
+    gUnknown_0202ADA0.unkA++;
+    if (gUnknown_0202ADA0.unkA > gUnknown_086A7768[gUnknown_0202ADA0.unk8].unk2)
+    {
+        if (gUnknown_0202ADA0.unk8 < 7)
+            sub_10708(&gUnknown_0201C1C0[gUnknown_086A7788[gUnknown_0202ADA0.unk8] * 2], (void *)(VRAM + 0x36E0), 8, 8);
+        else
+            sub_10708(&gUnknown_0201C1C0[gUnknown_086A7788[gUnknown_0202ADA0.unk8] * 2], (void *)(VRAM + 0x32C0), 10, 10);
+        gUnknown_0202ADA0.unk8++;
+    }
+    gUnknown_0202ADA0.unk14++;
+    if (gUnknown_0202ADA0.unk14 > 9)
+    {
+        gUnknown_0202ADA0.unk14 = 0;
+        gUnknown_0202C790 += 2;
+    }
+    sub_9E90();
+    gMain.unk2E8[0].unk0 = gUnknown_0202ADA0.unk0;
+    gMain.unk2E8[0].unk2 = gUnknown_0202ADA0.unk2;
+    gMain.unk2E8[1].unk0 = gUnknown_0202ADA0.unk24;
+    gMain.unk2E8[1].unk2 = gUnknown_0202ADA0.unk26;
+    gMain.unk2E8[2].unk0 = gUnknown_0202ADA0.unkC;
+    gMain.unk2E8[2].unk2 = gUnknown_0202ADA0.unkE;
+}
+
+void nullsub_4(void)
+{
+}
+
+void sub_9C10(void)
+{
+    gUnknown_0202ADA0.unk18++;
+    if (gUnknown_0202BF10 % 2 == 0)
+    {
+        gUnknown_0201A450.unk30--;
+        gUnknown_0201A450.unk32--;
+        gUnknown_0201A450.unk20 -= 2;
+        gUnknown_0201A450.unk22 -= 2;
+    }
+    sub_9E90();
+    gMain.unk2E8[3].unk0 = gUnknown_0202ADA0.unk18;
+    gMain.unk2E8[3].unk2 = gUnknown_0202ADA0.unk1A;
+    gUnknown_0201A450.unk3A++;
+    if (gUnknown_0201A450.unk3A > 0x14)
+    {
+        gUnknown_0201A450.unk3A = 0;
+        gUnknown_0202C790 += 3;
+    }
+}
+
+void nullsub_5(void)
+{
+}
+
+void nullsub_17(void)
+{
+}
+
+extern void sub_10480(void);
+extern void sub_10544(void);
+
+void sub_9C9C(void)
+{
+    sub_10480();
+    sub_10544();
+    gUnknown_0202C790++;
+}
+
+extern const struct SpriteSet *const gUnknown_086A769C[];
+//extern struct SpriteGroup gUnknown_0200B698[];
+
+void sub_9CB8(void)
+{
+    struct SpriteGroup *r5 = &gUnknown_0200B3B8[gUnknown_0201A450.unk8 + 4];
+    const struct SpriteSet *r7;
+    int i;
+
+    r5->available = gUnknown_0201A450.unkC;
+    LoadSpriteSets(gUnknown_086A769C, 0x31, gUnknown_0200B3B8);
+    if (r5->available == 1)
+    {
+        r5->baseX = gUnknown_0201A450.unk0;
+        r5->baseY = gUnknown_0201A450.unk2;
+        r7 = gUnknown_086A769C[gUnknown_0201A450.unk8 + 4];
+        for (i = 0; i < r7->count; i++)
+        {
+            gOamBuffer[r5->oam[i].oamId].x = r5->oam[i].xOffset + r5->baseX;
+            gOamBuffer[r5->oam[i].oamId].y = r5->oam[i].yOffset + r5->baseY;
+            asm("");  // needed to match
+        }
+    }
+    r5->available = 0;
+}
+
+extern struct {s16 unk0; s16 unk2;} gUnknown_086A7798[];
+
+void sub_9D70(void)
+{
+    struct SpriteGroup *r8 = &gUnknown_0200B3B8[0x28];
+    int i;
+
+    r8->available = gUnknown_0201A450.unkC;
+    LoadSpriteSets(gUnknown_086A769C, 0x31, gUnknown_0200B3B8);
+    if (r8->available == 1)
+    {
+        SetMatrixScale(gUnknown_02019C30, gUnknown_0201C188, 0);
+        r8->baseX = gUnknown_0201A450.unk0;
+        r8->baseY = gUnknown_0201A450.unk2;
+        for (i = 0; i < 4; i++)
+        {
+            gOamBuffer[r8->oam[i].oamId].x = gUnknown_086A7798[i].unk0 * gUnknown_02019C30 / 256 + r8->baseX;
+            gOamBuffer[r8->oam[i].oamId].y = gUnknown_086A7798[i].unk2 * gUnknown_0201C188 / 256 + r8->baseY;
+            gOamBuffer[r8->oam[i].oamId].affineMode = 1;
+            gOamBuffer[r8->oam[i].oamId].matrixNum = 0;
+        }
+    }
+    r8->available = 0;
+}
+
